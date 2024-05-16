@@ -116,7 +116,7 @@ std::vector<std::string> Algorithms::MSDRadixSortOther(std::vector<std::string> 
     }
 
     for (int i = 0; i < ALFABET_SIZE; ++i) {
-        countStrings[i] = MSDRadixSort(countStrings[i], L+1);
+        countStrings[i] = MSDRadixSortOther(countStrings[i], L+1);
     }
 
     for (int i = 0; i < ALFABET_SIZE; ++i) {
@@ -151,13 +151,13 @@ int Algorithms::compareStrings(const std::string &s1, const std::string &s2) {
     int s1Idx = 0;
     int s2Idx = 0;
     while (s1Idx < s1.size() && s2Idx < s2.size()) {
+        ++operationCount;
         if (s1[s1Idx] > s2[s2Idx])
             return 1;
         else if (s1[s1Idx] < s2[s2Idx])
             return -1;
         ++s1Idx;
         ++s2Idx;
-        ++operationCount;
     }
 
     if (s1.size() > s2.size()) {
@@ -200,6 +200,51 @@ std::vector<std::string> Algorithms::quickSort(std::vector<std::string> R) {
 std::vector<std::string> Algorithms::checkQuickSort(std::vector<std::string> R) {
     operationCount = 0;
     return Algorithms::quickSort(R);
+}
+
+std::vector<std::string> Algorithms::ternaryMergeSort(std::vector<std::string> R, int L) {
+
+}
+
+std::vector<std::string> Algorithms::mergeSort(std::vector<std::string> R) {
+    if (R.size() <= 1) {
+        return R;
+    }
+
+    int mid = (R.size()) / 2;
+    std::vector<std::string> Left;
+    std::vector<std::string> Right;
+    for (int i = 0; i<R.size(); ++i) {
+        if (i < mid) {
+            Left.emplace_back(R[i]);
+        } else {
+            Right.emplace_back(R[i]);
+        }
+    }
+
+    Left = mergeSort(Left);
+    Right = mergeSort(Right);
+    std::vector<std::string> result;
+
+    int Lidx = 0;
+    int Ridx = 0;
+
+    while (Lidx < Left.size() && Ridx < Right.size()) {
+        if (compareStrings(Left[Lidx], Right[Ridx]) == -1) {
+            result.emplace_back(Left[Lidx]);
+            ++Lidx;
+        } else {
+            result.emplace_back(Right[Ridx]);
+            ++Ridx;
+        }
+    }
+
+    return result;
+}
+
+std::vector<std::string> Algorithms::checkMergeSort(std::vector<std::string> R) {
+    operationCount=0;
+    return mergeSort(R);
 }
 
 

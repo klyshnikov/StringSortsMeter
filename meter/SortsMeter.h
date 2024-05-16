@@ -1,5 +1,5 @@
-#ifndef STRINGSORTANALYZER_SORTSMETTER_H
-#define STRINGSORTANALYZER_SORTSMETTER_H
+#ifndef STRINGSORTANALYZER_SORTSMETER_H
+#define STRINGSORTANALYZER_SORTSMETER_H
 
 #include <iostream>
 #include <vector>
@@ -7,9 +7,10 @@
 
 #include "../algorithms/Algorithms.h"
 
-class SortsMetter {
+class SortsMeter {
 public:
     std::pair<double, int> tryQuickSort(std::vector<std::string> strings);
+    std::pair<double, int> tryMergeSort(std::vector<std::string> strings);
 
     std::pair<double, int> tryTernaryQuickSort(std::vector<std::string> strings);
     std::pair<double, int> tryMSDRadixSortSort(std::vector<std::string> strings);
